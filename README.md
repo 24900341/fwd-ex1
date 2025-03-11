@@ -21,7 +21,7 @@ Import the necessary modules.
 Define a custom request handler.
 
 ### Step 6:
-Start an HTTP server on a specific port.
+Start an HTTP    server on a specific port.
 
 ### Step 7:
 Run the Python script to serve web pages.
