@@ -41,7 +41,9 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 
 ## PROGRAM:
 
-<!DOCTYPE html>
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
+content = """<!DOCTYPE html>
 
 <html lang="en">
 
@@ -50,15 +52,14 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
     <meta charset="UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Beautiful Webpage</title>
+    
     
     <style>
     
         body {
-        
             font-family: Arial, sans-serif;
-            
+        
             text-align: center;
             
             margin: 50px;
@@ -93,7 +94,6 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
             
             padding: 10px 20px;
             
-            
             border: none;
             
             border-radius: 5px;
@@ -106,19 +106,17 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
         
         button:hover {
         
-            
             background: #feb47b;
             
             color: white;
         }
-
         
     </style>
 
 </head>
 
 <body>
- 
+
     <div class="container">
     
         <h1>Welcome to My Beautiful Webpage</h1>
@@ -131,9 +129,29 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 
 </body>
 
-</html>
+</html>"""
 
+class myhandler(BaseHTTPRequestHandler):
 
+    def do_GET(self):
+    
+        print("request received")
+        
+        self.send_response(200)
+        
+        self.send_header('content-type', 'text/html; charset=utf-8')
+        
+        self.end_headers()
+        
+        self.wfile.write(content.encode())
+
+server_address = ('',80)
+
+httpd = HTTPServer(server_address,myhandler)
+
+print("my webserver is running...")
+
+httpd.serve_forever()
 
 
 
