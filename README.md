@@ -6,7 +6,7 @@ NAME : MOHAMED NIZAMUDDIN A
 REG NO : 212224040194 
 
 ## AIM:
-To develop a simple webserver to serve html pages and display the list of protocols in TCP/IP Protocol Suite.
+To develop a simple webserver using Python’s http.server module that serves HTML pages with a customizable colored background.
 
 ## DESIGN STEPS:
 ### Step 1: 
@@ -41,10 +41,9 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 
 ## PROGRAM:
 
+~~~
 from http.server import HTTPServer, BaseHTTPRequestHandler
-
 content = """<!DOCTYPE html>
-
 <html lang="en">
 
     <head>
@@ -130,9 +129,7 @@ content = """<!DOCTYPE html>
 </body>
 
 </html>"""
-
 class myhandler(BaseHTTPRequestHandler):
-
     def do_GET(self):
     
         print("request received")
@@ -146,12 +143,10 @@ class myhandler(BaseHTTPRequestHandler):
         self.wfile.write(content.encode())
 
 server_address = ('',80)
-
 httpd = HTTPServer(server_address,myhandler)
-
 print("my webserver is running...")
-
 httpd.serve_forever()
+~~~
 
 
 
